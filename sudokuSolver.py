@@ -2,15 +2,6 @@ def solve_sudoku(self, board: List[List[str]]) -> None:
     def get_block(i, j):
         return 3*(i//3)+j//3
 
-    rows, cols, blocks = [set() for _ in range(9)], [set() for _ in range(9)], [set() for _ in range(9)]
-
-    for i in range(9):
-        for j in range(9):
-            n = board[i][j]
-            rows[i].add(n)
-            cols[j].add(n)
-            blocks[get_block(i,j)].add(n)
-
     def next_empty_cell(i,j):
         j += 1
         if j == 9:
@@ -47,6 +38,16 @@ def solve_sudoku(self, board: List[List[str]]) -> None:
                 blocks[k].remove(n)
 
         return False
+    
+    rows, cols, blocks = [set() for _ in range(9)], [set() for _ in range(9)], [set() for _ in range(9)]
+
+    for i in range(9):
+        for j in range(9):
+            n = board[i][j]
+            rows[i].add(n)
+            cols[j].add(n)
+            blocks[get_block(i,j)].add(n)
+            
     i,j = next_empty_cell(0,-1)
     fill_cell(i, j)    
  
